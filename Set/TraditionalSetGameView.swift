@@ -66,6 +66,7 @@ struct TraditionalSetGameView: View {
     }
     
     private struct DrawingConstants {
+        static let cardAspectRatio: CGFloat = 13/21
         static let betweenCards: CGFloat = 5
     }
 }
@@ -79,6 +80,7 @@ struct CardView: View {
                 let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 shape.fill(Color.white)
                 shape.strokeBorder()
+                TraditionalSetFeature(cardToDraw: card)
             }
         })
     }

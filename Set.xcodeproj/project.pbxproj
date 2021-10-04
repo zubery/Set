@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCA298FA26F816DF006D85F4 /* TraditionalSetFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA298F926F816DF006D85F4 /* TraditionalSetFeature.swift */; };
 		BCDA276926E96C8500A1960C /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA276826E96C8500A1960C /* SetGame.swift */; };
 		BCDA277426EAF30100A1960C /* TraditionalSetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA277326EAF30100A1960C /* TraditionalSetGame.swift */; };
 		BCDA277726F28B0F00A1960C /* TraditionalSetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA277626F28B0F00A1960C /* TraditionalSetGameView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BCA298F926F816DF006D85F4 /* TraditionalSetFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalSetFeature.swift; sourceTree = "<group>"; };
 		BCDA276826E96C8500A1960C /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		BCDA277326EAF30100A1960C /* TraditionalSetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalSetGame.swift; sourceTree = "<group>"; };
 		BCDA277626F28B0F00A1960C /* TraditionalSetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraditionalSetGameView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				BCDA276826E96C8500A1960C /* SetGame.swift */,
 				BCDA277326EAF30100A1960C /* TraditionalSetGame.swift */,
 				BCDA277626F28B0F00A1960C /* TraditionalSetGameView.swift */,
+				BCA298F926F816DF006D85F4 /* TraditionalSetFeature.swift */,
 				BCDA277926F2C28A00A1960C /* AspectVGrid.swift */,
 			);
 			path = Set;
@@ -152,6 +155,7 @@
 			files = (
 				BCDA277426EAF30100A1960C /* TraditionalSetGame.swift in Sources */,
 				BCE598F726CECA3C005E143F /* ContentView.swift in Sources */,
+				BCA298FA26F816DF006D85F4 /* TraditionalSetFeature.swift in Sources */,
 				BCDA277A26F2C28A00A1960C /* AspectVGrid.swift in Sources */,
 				BCDA276926E96C8500A1960C /* SetGame.swift in Sources */,
 				BCDA277726F28B0F00A1960C /* TraditionalSetGameView.swift in Sources */,
