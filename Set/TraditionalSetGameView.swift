@@ -15,13 +15,29 @@ struct TraditionalSetGameView: View {
             Text("Set")
                 .font(.largeTitle)
                 .foregroundColor(.blue)
-            AspectVGrid(items: game.board, aspectRatio: 13/21) { card in
-                CardView(card: card)
-                    .padding(DrawingConstants.betweenCards)
-                    .onTapGesture {
-                        game.select(card)
+            if game.board.count <= 30 {
+                AspectVGrid(items: game.board, aspectRatio: 13/21) { card in
+                    // TODO: this and use in scrollview is not very readable
+                    CardView(card, cardStatus: game.cardStatus(card))
+                        .padding(DrawingConstants.betweenCards)
+                        .onTapGesture {
+                            game.select(card)
+                        }
+                    
+                }
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))]) {
+                        ForEach(game.board) { card in
+                            CardView(card, cardStatus: game.cardStatus(card))
+                                .padding(DrawingConstants.betweenCards)
+                                .aspectRatio(13/21, contentMode: .fit)
+                                .onTapGesture {
+                                    game.select(card)
+                                }
+                        }
                     }
-                
+                }
             }
             Spacer()
             HStack(alignment: .bottom) {
@@ -73,16 +89,37 @@ struct TraditionalSetGameView: View {
 
 struct CardView: View {
     let card: TraditionalSetGame.Card
+    let cardBorderColor: Color
+    let cardBorderThickness: CGFloat
     
     var body: some View {
         GeometryReader(content: { geometry in
             ZStack {
                 let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 shape.fill(Color.white)
-                shape.strokeBorder()
+                shape.strokeBorder(cardBorderColor, lineWidth: cardBorderThickness)
                 TraditionalSetFeature(cardToDraw: card)
             }
         })
+    }
+    
+    init(_ card: TraditionalSetGame.Card, cardStatus: TraditionalSetGame.CardStatus) {
+        self.card = card
+        
+        switch cardStatus {
+        case .unselected:
+            cardBorderColor = .black
+            cardBorderThickness = 1
+        case .selected:
+            cardBorderColor = .blue
+            cardBorderThickness = 3
+        case .nonmatch:
+            cardBorderColor = .red
+            cardBorderThickness = 3
+        case .match:
+            cardBorderColor = .green
+            cardBorderThickness = 3
+        }
     }
     
     private struct DrawingConstants {

@@ -10,7 +10,34 @@ import Foundation
 struct SetGame {
     private var deck: [Card]
     private(set) var board: [Card]
-    private(set) var selectedCards = [Card]()
+    private(set) var selectedCards = [Card]() {
+        didSet {
+            if selectedCards.count == 3,
+               isASet(
+                first: selectedCards[0],
+                second: selectedCards[1],
+                third: selectedCards[2]
+               ) {
+                // TODO: Have to set original cards in board due to deep copy to selectedCards; any better way to do this?
+                board = board.map { card in
+                    if selectedCards.contains(card) {
+                        var matchedCard = card
+                        matchedCard.isMatched = true
+                        return matchedCard
+                    } else {
+                        return card
+                    }
+                }
+                
+                selectedCards[0].isMatched = true
+                selectedCards[1].isMatched = true
+                selectedCards[2].isMatched = true
+                
+                score += 1
+                print(selectedCards)
+            }
+        }
+    }
     private(set) var score = 0
     
     private static let numberOfCards = 81
@@ -25,21 +52,21 @@ struct SetGame {
                 selectedCards.append(card)
             }
         } else if selectedCards.count == 3 {
-            selectedCards.removeAll()
-            
             if selectedCards.first!.isMatched {
+                print("so they matched...")
                 removeMatchedCards()
                 dealCards()
                 if board.contains(card) {
                     selectedCards.append(card)
                 }
             } else {
+                selectedCards.removeAll()
                 selectedCards.append(card)
             }
         }
     }
     
-    private mutating func isASet(first: inout Card, second: inout Card, third: inout Card) -> Bool {
+    private func isASet(first: Card, second: Card, third: Card) -> Bool {
         let numbersCheck = doFeaturesMakeSet(first.featureNumber, second.featureNumber, third.featureNumber)
         let shapeCheck = doFeaturesMakeSet(first.featureShape, second.featureShape, third.featureShape)
         let shadingCheck = doFeaturesMakeSet(first.featureShading, first.featureShading, first.featureShading)
@@ -47,13 +74,6 @@ struct SetGame {
         
         
         let result = numbersCheck && shapeCheck && shadingCheck && colorCheck
-        
-        if result == true {
-            first.isMatched = true
-            second.isMatched = true
-            third.isMatched = true
-            score += 1
-        }
         
         return result
     }
@@ -74,6 +94,7 @@ struct SetGame {
     }
     
     private mutating func removeMatchedCards() {
+        selectedCards.removeAll()
         // TODO: Should I use filter or forEach here?
         board = board.filter { !$0.isMatched }
     }

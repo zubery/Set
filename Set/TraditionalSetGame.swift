@@ -25,6 +25,26 @@ class TraditionalSetGame: ObservableObject {
         return model.score
     }
     
+    func cardStatus(_ card: SetGame.Card) -> CardStatus {
+        if !model.selectedCards.contains(card) {
+            return CardStatus.unselected
+        } else {
+            if model.selectedCards.count != 3 {
+                return CardStatus.selected
+            } else {
+                if model.selectedCards.first!.isMatched {
+                    return CardStatus.match
+                } else {
+                    return CardStatus.nonmatch
+                }
+            }
+        }
+    }
+    
+    enum CardStatus {
+        case unselected, selected, nonmatch, match
+    }
+    
     // MARK: - Intent(s)
     
     func select(_ card: SetGame.Card) {
