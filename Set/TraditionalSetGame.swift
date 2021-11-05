@@ -15,6 +15,12 @@ class TraditionalSetGame: ObservableObject {
     }
     
     @Published private var model: SetGame
+    var deck: [SetGame.Card] {
+        return model.deck
+    }
+    var discard: [SetGame.Card] {
+        return model.discard
+    }
     var board: [SetGame.Card] {
         return model.board
     }
@@ -51,8 +57,12 @@ class TraditionalSetGame: ObservableObject {
         model.select(card)
     }
     
-    func dealMoreCards() {
-        model.dealMoreCards()
+    func dealCards() {
+        model.dealCards()
+    }
+    
+    func discardMatchedCards() {
+        model.discardMatchedCards()
     }
     
     func newGame() {
